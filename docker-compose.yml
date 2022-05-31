@@ -7,7 +7,7 @@ services:
       dockerfile: mcl.Dockerfile
     volumes:
       - ./zcashparams:/root/.zcash-params
-      - ./chain-files:/root/.komodo/MCL
+      - ./chain-files:/root/.komodo
       - ./chain-config:/root/config
     environment:
       - TZ=Asia/Istanbul
