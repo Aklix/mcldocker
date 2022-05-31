@@ -11,4 +11,7 @@ services:
       - ./chain-config:/root/config
     environment:
       - TZ=Asia/Istanbul
-    entrypoint: bash -c "/root/marmara/zcutil/fetch-params.sh -al && /root/config/start.sh"
+    ports:
+      - 33571:33825
+      - 33622:33824 
+    entrypoint: bash -c "/root/marmara/zcutil/fetch-params.sh && /root/config/start.sh"
