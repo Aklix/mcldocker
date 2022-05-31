@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  mcl-node:
+    container_name: mcl_node
+    build:
+      context: ./dockerfile
+      dockerfile: mcl.Dockerfile
+    volumes:
+      - ./zcashparams:/root/.zcash-params
+      - ./chain-files:/root/.komodo/MCL
+      - ./chain-config:/root/config
+    environment:
+      - TZ=Asia/Istanbul
+    entrypoint: bash -c "/root/marmara/zcutil/fetch-params.sh -al && /root/config/start.sh"
