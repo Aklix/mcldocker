@@ -1,14 +1,42 @@
-version: '3.1'
+version: '3.7'
 services:
-  mcl-node:
-    container_name: mcl_node
+  mcl-node1:
+    container_name: mcl_node1
     build:
       context: ./dockerfile
       dockerfile: mcl.Dockerfile
+    networks:
+      back-end:
+          ipv4_address: 10.1.0.100
     volumes:
       - ./zcashparams:/root/.zcash-params
-      - ./chain-files:/root/.komodo/MCL
-      - ./chain-config:/root/config
+      - ./chain-files1:/root/.komodo
+      - ./chain-config1:/root/config
     environment:
       - TZ=Asia/Istanbul
-    entrypoint: bash -c "/root/marmara/zcutil/fetch-params.sh -al && /root/config/start.sh"
+    entrypoint: bash -c "/root/marmara/zcutil/fetch-params.sh && /root/config/start.sh"
+  
+  mcl-node2:
+    container_name: mcl_node2
+    build:
+      context: ./dockerfile
+      dockerfile: mcl.Dockerfile
+    networks:
+      back-end:
+          ipv4_address: 10.1.0.102
+    volumes:
+      - ./zcashparams:/root/.zcash-params
+      - ./chain-files2:/root/.komodo
+      - ./chain-config2:/root/config
+    environment:
+      - TZ=Asia/Istanbul
+    entrypoint: bash -c "/root/marmara/zcutil/fetch-params.sh && /root/config/start.sh"
+
+networks:
+  back-end:
+    driver: bridge
+    ipam: 
+      driver: default
+      config:
+        - subnet: 10.1.0.0/24
+          gateway: 10.1.0.1
