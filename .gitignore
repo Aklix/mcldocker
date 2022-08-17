@@ -1,3 +1,6 @@
-chain-files1/
-chain-files2/
-zcashparams/
+!chain-files1/
+!chain-files2/
+chain-files1/*
+chain-files2/*
+!zcashparams/
+zcashparams/*
