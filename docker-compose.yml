@@ -10,6 +10,7 @@ services:
           ipv4_address: 10.1.0.100
     volumes:
       - ./zcashparams:/root/.zcash-params
+<<<<<<< HEAD
       - ./chain-files1:/root/.komodo
       - ./chain-config1:/root/config
     environment:
@@ -40,3 +41,13 @@ networks:
       config:
         - subnet: 10.1.0.0/24
           gateway: 10.1.0.1
+=======
+      - ./chain-files:/root/.komodo
+      - ./chain-config:/root/config
+    environment:
+      - TZ=Asia/Istanbul
+    ports:
+      - 33571:33825
+      - 33622:33824 
+    entrypoint: bash -c "/root/marmara/zcutil/fetch-params.sh && /root/config/start.sh"
+>>>>>>> 45e31c94afe1ad530e6ed2e201c78871ab71c2c8
