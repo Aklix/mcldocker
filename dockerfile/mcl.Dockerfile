@@ -1,8 +1,10 @@
 FROM ubuntu:18.04
 USER root
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoconf libtool ncurses-dev unzip git python python-zmq zlib1g-dev wget curl bsdmainutils automake cmake clang ntp ntpdate nano -y
-RUN git clone https://github.com/marmarachain/marmara ~/marmara 
-RUN ~/marmara/zcutil/build.sh -j$(nproc)
+RUN apt-get update && apt-get upgrade -y 
+ARG CHAINLINK
+RUN apt-get install unzip libgomp1 nano wget -y
+RUN mkdir /root/marmara && mkdir /root/marmara/src
+RUN cd /root/marmara/src && wget $CHAINLINK && unzip MCL-linux.zip && chmod +x komodod komodo-cli fetch-params.sh
+COPY run_mcl ./root/
+RUN chmod +x /root/run_mcl
+WORKDIR /root

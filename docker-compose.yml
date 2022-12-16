@@ -5,32 +5,32 @@ services:
     build:
       context: ./dockerfile
       dockerfile: mcl.Dockerfile
+      args:
+      - CHAINLINK=https://github.com/marmarachain/marmara/releases/download/v1.1.6/MCL-linux.zip
     networks:
       back-end:
           ipv4_address: 10.1.0.100
     volumes:
       - ./zcashparams:/root/.zcash-params
-      - ./chain-files1:/root/.komodo
-      - ./chain-config1:/root/config
-    environment:
-      - TZ=Asia/Istanbul
-    entrypoint: bash -c "/root/marmara/zcutil/fetch-params.sh && /root/config/start.sh"
+      - ./chain-files1:/root/.komodo/MCL
+    entrypoint: bash -c "/root/run_mcl"
+    #restart: always
   
-  mcl-node2:
-    container_name: mcl_node2
-    build:
-      context: ./dockerfile
-      dockerfile: mcl.Dockerfile
-    networks:
-      back-end:
-          ipv4_address: 10.1.0.102
-    volumes:
-      - ./zcashparams:/root/.zcash-params
-      - ./chain-files2:/root/.komodo
-      - ./chain-config2:/root/config
-    environment:
-      - TZ=Asia/Istanbul
-    entrypoint: bash -c "/root/marmara/zcutil/fetch-params.sh && /root/config/start.sh"
+  # mcl-node2:
+  #   container_name: mcl_node2
+  #   build:
+  #     context: ./dockerfile
+  #     dockerfile: mcl.Dockerfile
+  #   networks:
+  #     back-end:
+  #         ipv4_address: 10.1.0.102
+  #   volumes:
+  #     - ./zcashparams:/root/.zcash-params
+  #     - ./chain-files2:/root/.komodo
+  #     - ./chain-config2:/root/config
+  #   environment:
+  #     - TZ=Asia/Istanbul
+  #   entrypoint: bash -c "/root/marmara/zcutil/fetch-params.sh && /root/config/start.sh"
 
 networks:
   back-end:
@@ -39,4 +39,4 @@ networks:
       driver: default
       config:
         - subnet: 10.1.0.0/24
-          gateway: 10.1.0.1
+          #gateway: 10.1.0.1
