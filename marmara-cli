@@ -1,0 +1,4 @@
+##!/bin/bash
+echo $1 $2 $3 $4 $5
+sudo docker exec -it mcl_node1 /root/marmara/src/komodo-cli -ac_name=MCL $1 $2 $3 $4 $5
+

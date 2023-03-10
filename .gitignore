@@ -1,8 +1,1 @@
-chain-files1/*
-chain-files2/*
-zcashparams/*
-!chain-files1/ .gitkeep
-!chain-files1/MCL.conf .gitkeep
-!chain-files2/ .gitkeep
-!zcashparams/ .gitkeep 
-
+volumes/*
