@@ -6,47 +6,47 @@ services:
         context: ./dockerfile
         dockerfile: mcl.Dockerfile
         args:
-          - repourl=https://github.com/marmarachain/marmara.git
-          - branch=master
-          - TZ=Asia/Istanbul
+          - TZ=${TZ}
       volumes:
+        - ./daemonfiles/marmara/:/root/marmara
         - ./volumes/zcashparams:/root/.zcash-params
         - ./volumes/nodefiles-mcl-1:/root/.komodo/MCL
-      entrypoint: bash -c "/root/run_mcl"
+      entrypoint: bash -c "/root/build_run_mcl"
       restart: always
-  ##!/bin/bash
-  # mcl-node1:
-  #   container_name: mcl_node1
+  # ssh-client1:
+  #   container_name: sshclient1
   #   build:
   #     context: ./dockerfile
-  #     dockerfile: mcl.Dockerfile.release
+  #     dockerfile: sshclient.Dockerfile
   #     args:
-  #     - CHAINLINK=https://github.com/marmarachain/marmara/releases/download/v1.1.6/MCL-linux.zip
-  #   networks:
-  #     back-end:
-  #         ipv4_address: 10.1.0.100
+  #       - PW=12345
   #   volumes:
+  #     - ./daemonfiles/ssh-mcl-1/:/root/marmara/src
   #     - ./volumes/zcashparams:/root/.zcash-params
-  #     - ./volumes/nodefiles-mcl-1:/root/.komodo/MCL
-  #   entrypoint: bash -c "/root/run_mcl"
-  #   #restart: always
-  
+  #     - ./volumes/sshnode-mcl-1:/root/.komodo/MCL
+  #   ports:
+  #   - "49155:22"
+  #   environment:
+  #     - mcl_releaseurl=${mcl_releaseurl}
+  #   entrypoint: bash -c "/root/ssh_run_mcl"
+  #   restart: always
+
   # mcl-node2:
   #   container_name: mcl_node2
   #   build:
   #     context: ./dockerfile
-  #     dockerfile: mcl.Dockerfile
-  #   networks:
-  #     back-end:
-  #         ipv4_address: 10.1.0.102
+  #     dockerfile: mcl-release.Dockerfile
+  #     args:
+  #     - CHAINLINK=${mcl_releaseurl}
+  #   # networks:
+  #   #   back-end:
+  #   #       ipv4_address: 10.1.0.100
   #   volumes:
-  #     - ./zcashparams:/root/.zcash-params
-  #     - ./chain-files2:/root/.komodo
-  #     - ./chain-config2:/root/config
-  #   environment:
-  #     - TZ=Asia/Istanbul
-  #   entrypoint: bash -c "/root/marmara/zcutil/fetch-params.sh && /root/config/start.sh"
-
+  #     - ./volumes/zcashparams:/root/.zcash-params
+  #     - ./volumes/nodefiles-mcl-2:/root/.komodo/MCL
+  #   entrypoint: bash -c "/root/run_mcl"
+  #   #restart: always
+  
 # networks:
 #   back-end:
 #     driver: bridge
