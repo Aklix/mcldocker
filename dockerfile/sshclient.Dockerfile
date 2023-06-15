@@ -12,19 +12,14 @@ RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_confi
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
 RUN mkdir /root/.ssh
-RUN apt-get install unzip libgomp1 nano wget -y
+RUN apt-get install unzip libgomp1 nano curl wget cron -y
 
-COPY ssh_run_mcl ./root/
-RUN chmod +x /root/ssh_run_mcl
+COPY crontab-config /etc/cron.d/crontab
+RUN  chmod 0644 /etc/cron.d/crontab
+RUN /usr/bin/crontab /etc/cron.d/crontab
+
+COPY start_mcl_cron ./root/
+RUN chmod +x /root/start_mcl_cron
 WORKDIR /root
-
 EXPOSE 22
-
 CMD    ["/usr/sbin/sshd", "-D"]
-
-
-
-
-
-
-RUN apt-get install unzip libgomp1 -y
