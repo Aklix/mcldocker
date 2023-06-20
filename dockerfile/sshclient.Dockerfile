@@ -15,11 +15,11 @@ RUN mkdir /root/.ssh
 RUN apt-get install unzip libgomp1 nano curl wget cron -y
 
 COPY crontab-config /etc/cron.d/crontab
-RUN  chmod 0644 /etc/cron.d/crontab
-RUN /usr/bin/crontab /etc/cron.d/crontab
+RUN  chmod 0644 /etc/cron.d/crontab && crontab /etc/cron.d/crontab
 
-COPY start_mcl_cron ./root/
-RUN chmod +x /root/start_mcl_cron
+COPY staking_cron ./root/
+COPY run_mcl ./root/
+RUN chmod +x /root/start_mcl_cron /root/run_mcl
 WORKDIR /root
 EXPOSE 22
 CMD    ["/usr/sbin/sshd", "-D"]
