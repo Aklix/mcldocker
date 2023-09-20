@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+    builcontainer:
+        container_name: mclbuild
+        build:
+            context: ./dockerfile
+            dockerfile: Dockerfile.mcl-build
+            args:
+                - TZ=Asia/Istanbul
+        environment:
+            - repourl=https://github.com/marmarachain/marmara.git
+            - branch=${branch}
+            - build=${build}
+            - depends=${depends}
+        volumes:
+         - ./volumes/marmara/:/root/marmara
+        entrypoint: bash -c "/root/build_MCL.sh"

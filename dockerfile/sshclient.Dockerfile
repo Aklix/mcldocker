@@ -19,7 +19,7 @@ RUN  chmod 0644 /etc/cron.d/crontab && crontab /etc/cron.d/crontab
 
 COPY staking_cron ./root/
 COPY run_mcl ./root/
-RUN chmod +x /root/start_mcl_cron /root/run_mcl
+RUN chmod +x /root/staking_cron /root/run_mcl
 WORKDIR /root
 EXPOSE 22
 CMD    ["/usr/sbin/sshd", "-D"]

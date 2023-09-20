@@ -1,5 +1,6 @@
 volumes/*
 daemonfiles/*
+buildmcl/volumes/*
 !daemonfiles/
 !update_MCL.sh
 !daemonfiles/install_MCL.sh

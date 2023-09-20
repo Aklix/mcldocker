@@ -1,0 +1,3 @@
+branch=master
+build=./zcutil/build-win.sh
+depends=libcurl4-gnutls-dev libsodium-dev mingw-w64
