@@ -20,14 +20,9 @@ echo -e "$STEP_START[ Step 2 ]$STEP_END Switching Branch $branch"
 cd marmara
 git checkout $branch
 
-if [ -n "$depends" ]; then
-    echo "Installing $depends..."
-    apt-get install $depends -y
-else
-    echo "\$depends variable is not set."
-fi
 echo $build
 echo -e "$STEP_START[ Step 3 ]$STEP_END Building marmara"
+make clean
 $build -j$(nproc)
 cd $CUR_DIR
 

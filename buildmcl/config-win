@@ -1,3 +1,5 @@
-branch=master
-build=./zcutil/build-win.sh
-depends=libcurl4-gnutls-dev libsodium-dev mingw-w64
+Container_name=mclbuild-win
+dockerfile=Dockerfile.mcl-build-win
+branch=marmarad
+build=./zcutil/build-win-dtest.sh
+repolocation=mcl-win

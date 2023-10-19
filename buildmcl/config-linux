@@ -1,2 +1,5 @@
-branch=master
+Container_name=mclbuild-linux
+dockerfile=Dockerfile.mcl-build
+branch=marmarad
 build=./zcutil/build.sh
+repolocation=mcl-linux
