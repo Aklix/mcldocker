@@ -1,13 +1,10 @@
 ##!/bin/bash
-source config-linux
-sudo docker-compose --env-file config-linux up --build
+sudo docker-compose up --build build-mcl-linux
 
 if [ $? -eq 0 ]; then
     echo "Build successfull"
-    sudo cp volumes/$repolocation/marmara/src/marmarad volumes/
-    sudo cp volumes/$repolocation/marmara/src/marmara-cli volumes/
+    sudo cp volumes/mcl-linux/marmara/src/marmarad volumes/
+    sudo cp volumes/mcl-linux/marmara/src/marmara-cli volumes/
 else
     echo "Build failed with exit status $?"
 fi
-
-sudo docker-compose --env-file config-linux down

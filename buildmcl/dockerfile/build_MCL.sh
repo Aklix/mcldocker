@@ -19,6 +19,7 @@ echo -e "$STEP_START[ Step 2 ]$STEP_END Switching Branch $branch"
 
 cd marmara
 git checkout $branch
+git pull
 
 echo $build
 echo -e "$STEP_START[ Step 3 ]$STEP_END Building marmara"

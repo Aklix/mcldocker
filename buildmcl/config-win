@@ -1,5 +1,0 @@
-Container_name=mclbuild-win
-dockerfile=Dockerfile.mcl-build-win
-branch=marmarad
-build=./zcutil/build-win-dtest.sh
-repolocation=mcl-win

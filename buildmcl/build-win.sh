@@ -1,13 +1,10 @@
 ##!/bin/bash
-source config-win
-sudo docker-compose --env-file config-win up --build
+sudo docker-compose up --build build-mcl-win
 
 if [ $? -eq 0 ]; then
     echo "Build successfull"
-    cp volumes/$repolocation/marmara/src/marmarad.exe volumes/
-    cp volumes/$repolocation/marmara/src/marmara-cli.exe volumes/
+    sudo cp volumes/mcl-win/marmara/src/marmarad.exe volumes/
+    sudo cp volumes/mcl-win/marmara/src/marmara-cli.exe volumes/
 else
     echo "Build failed with exit status $?"
 fi
-
-sudo docker-compose --env-file config-win down
