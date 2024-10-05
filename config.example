@@ -1,0 +1,8 @@
+#node name | password | ssh port | pubkey
+nodes=(
+"mcl-node1:password1:2201:pubkey123"
+
+)
+
+mcl_version=v1.2.1
+

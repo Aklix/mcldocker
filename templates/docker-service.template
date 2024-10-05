@@ -1,0 +1,23 @@
+
+  {{ node.name }}:
+    container_name: {{ container.name }}
+    build:
+      context: ./dockerfile
+      dockerfile: Dockerfile.mcl
+      args:
+        - PW={{ node.password }}  
+    environment:
+      - USER_ID=${USER_ID}
+      - GROUP_ID=${GROUP_ID}
+      - MCL_VERSION=${MCL_VERSION}
+    ports:
+      - "{{ ssh_port }}:22"
+    volumes:
+      - <<: *zcash-params
+      - ./chainfiles/{{ volume.name }}:/home/marmarix/.komodo/MCL
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+    command: ["marmarad", "-pubkey={{ node.pubkey }}"]
