@@ -1,7 +1,0 @@
-x-zcash-params-volume:
-  &zcash-params
-  type: bind
-  read_only: true
-  source: /home/${USER}/.zcash-params
-  target: /home/marmarix/.zcash-params
-  

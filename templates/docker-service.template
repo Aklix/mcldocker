@@ -3,18 +3,18 @@
     container_name: {{ container.name }}
     build:
       context: ./dockerfile
-      dockerfile: Dockerfile.mcl
+      dockerfile: Dockerfile.mcl_ssh
       args:
-        - PW={{ node.password }}  
-    environment:
-      - USER_ID=${USER_ID}
-      - GROUP_ID=${GROUP_ID}
-      - MCL_VERSION=${MCL_VERSION}
+        - MCL_VERSION=${MCL_VERSION}
+        - PW={{ ssh_pw }}
+        - sshUSER={{ ssh_user }}
+        - USER_ID=${USER_ID}
+        - GROUP_ID=${GROUP_ID}   
     ports:
       - "{{ ssh_port }}:22"
     volumes:
-      - <<: *zcash-params
-      - ./chainfiles/{{ volume.name }}:/home/marmarix/.komodo/MCL
+      - /home/${USER}/.zcash-params:/home/{{ container.user }}/.zcash-params
+      - ./chainfiles/{{ volume.name }}:/home/{{ volume.user }}/.komodo/MCL
     logging:
       driver: "json-file"
       options:

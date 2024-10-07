@@ -1,4 +1,5 @@
 .env
 config
-doceker-compose.ylm
+docker-compose.yml
 chainfiles/*
+*.bak

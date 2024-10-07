@@ -1,0 +1,45 @@
+FROM ubuntu:20.04
+
+# Update and install required packages
+RUN apt-get update  -y && \
+    apt-get install -y openssh-server unzip libgomp1 nano curl wget
+
+
+# Create the SSH directory and set permissions
+RUN mkdir /var/run/sshd
+
+# Define build arguments
+ARG GROUP_ID
+ARG USER_ID
+ARG sshUSER
+ARG PW
+ARG MCL_VERSION
+
+# Create the user and set permissions
+RUN groupadd --gid ${GROUP_ID} usergroup && \
+    useradd -m --uid ${USER_ID} --gid ${GROUP_ID} ${sshUSER} && \
+    echo "${sshUSER}:${PW}" | chpasswd
+WORKDIR /home/${sshUSER}
+
+RUN wget https://github.com/marmarachain/marmara/releases/download/${MCL_VERSION}/MCL-linux.zip && \
+    unzip MCL-linux.zip &&  chmod +x marmarad marmara-cli && \
+    rm MCL-linux.zip fetch-params.sh
+
+RUN mv marmarad /usr/local/bin/marmarad
+
+COPY entrypoint.sh /entrypoint.sh
+# Set ownership and permissions
+RUN chown -R ${sshUSER}:usergroup /home/${sshUSER}
+
+
+# Configure SSH to disable root login
+RUN echo "PermitRootLogin no" >> /etc/ssh/sshd_config && \
+    echo "AllowUsers ${sshUSER}" >> /etc/ssh/sshd_config
+# Expose SSH port
+
+EXPOSE 22
+
+USER ${sshUSER}
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["marmarad"]

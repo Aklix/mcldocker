@@ -1,6 +1,6 @@
-#node name | password | ssh port | pubkey
+#node name | ssh_user | password | ssh port | pubkey
 nodes=(
-"mcl-node1:password1:2201:pubkey123"
+"mcl_node1:user1:password1:2201:pubkey123"
 
 )
 
