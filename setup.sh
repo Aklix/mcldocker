@@ -1,3 +1,5 @@
+set -e
+
 source config
 if [ ! -f config ]; then
     echo "Error: config file not found!"
@@ -16,6 +18,9 @@ echo "USER=${USER}" >> .env
 echo "USER_ID=$(id -u)" >> .env
 echo "GROUP_ID=$(id -g)" >> .env
 #echo ".env file created."
+
+echo "building mclbuilder for mc-${mcl_version}"
+docker-compose -f docker-compose.mclbuild build
 
 OUTPUT_FILE="docker-compose.yml"
 SERVICE_TEMPLATE="templates/docker-service.template"

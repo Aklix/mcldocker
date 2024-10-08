@@ -1,7 +1,18 @@
+# Usage Guide
+
+# For the nodes variable, you can define multiple nodes following this format:
+# "node_name:ssh_user:password:ssh_port:pubkey"
+#
+# - Always keep the node definition inside quotes ("").
+# - Don't leave any spaces before or after the colons (:).
+# - Use only one line per node.
+# - Do not use special characters like `-`, `@`, `#`, `!`, or spaces in the `node_name`, `ssh_user`, or `password`.
+#   Only alphanumeric characters (A-Z, a-z, 0-9) and underscores (_) are allowed.
+
 #node name | ssh_user | password | ssh port | pubkey
 nodes=(
 "mcl_node1:user1:password1:2201:pubkey123"
-
+#"mcl_node2:user2:password2:2202:pubkey456"  # Uncomment to use the second node
 )
 
 mcl_version=v1.2.1

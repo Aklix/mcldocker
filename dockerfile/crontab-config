@@ -1,2 +1,0 @@
-*/10 * * * * /root/staking_cron >> /root/cron.log 2>&1
-*/5 * * * * /root/run_mcl >> /dev/null 2>&1

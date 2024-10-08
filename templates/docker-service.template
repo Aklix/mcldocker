@@ -1,15 +1,12 @@
 
   {{ node.name }}:
     container_name: {{ container.name }}
-    build:
-      context: ./dockerfile
-      dockerfile: Dockerfile.mcl_ssh
-      args:
-        - MCL_VERSION=${MCL_VERSION}
-        - PW={{ ssh_pw }}
-        - sshUSER={{ ssh_user }}
-        - USER_ID=${USER_ID}
-        - GROUP_ID=${GROUP_ID}   
+    image: marmarassh:latest
+    environment:
+      - PW={{ ssh_pw }}
+      - sshUSER={{ ssh_user }}
+      - USER_ID=${USER_ID}
+      - GROUP_ID=${GROUP_ID}   
     ports:
       - "{{ ssh_port }}:22"
     volumes:

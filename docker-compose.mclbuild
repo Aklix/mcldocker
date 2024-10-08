@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+
+  mcl_build:
+    container_name: mcl_builder
+    build:
+      context: ./dockerfile
+      dockerfile: Dockerfile.mcl_ssh
+      args:
+        - MCL_VERSION=${MCL_VERSION}
+    image: marmarassh
