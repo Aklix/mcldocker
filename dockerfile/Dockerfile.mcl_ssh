@@ -1,25 +1,22 @@
 FROM ubuntu:20.04
 
-# Update and install required packages
-RUN apt-get update -y && apt-get install -y unzip wget
-
 # Define build arguments
 ARG MCL_VERSION
-RUN wget https://github.com/marmarachain/marmara/releases/download/${MCL_VERSION}/MCL-linux.zip && \
+# Update and install required packages
+RUN apt-get update -y && \
+    apt-get install -y unzip wget nano htop libgomp1 gosu openssh-server && \
+    wget https://github.com/marmarachain/marmara/releases/download/${MCL_VERSION}/MCL-linux.zip && \
     unzip MCL-linux.zip &&  chmod +x marmarad marmara-cli && \
     rm MCL-linux.zip fetch-params.sh version.info && \
-    apt-get remove --purge -y wget unzip $(apt-mark showauto) && \
-    rm -rf /var/lib/apt/lists/* 
-RUN mv marmarad /usr/local/bin/marmarad && mv marmara-cli /usr/local/bin/marmara-cli
-RUN apt-get update && apt-get install -y nano htop libgomp1 gosu openssh-server
+    mv marmarad /usr/local/bin/marmarad && \
+    mv marmara-cli /usr/local/bin/marmara-cli && \
+    apt-get remove --purge -y wget unzip && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Create the SSH directory
-RUN mkdir /var/run/sshd
-
+# Create the SSH directory and Disable root login
+RUN mkdir /var/run/sshd && \
+    echo "PermitRootLogin no" >> /etc/ssh/sshd_config
 COPY entrypoint.sh /entrypoint.sh
-
-# Disable root login
-RUN echo "PermitRootLogin no" >> /etc/ssh/sshd_config
 
 # Expose SSH port
 EXPOSE 22
