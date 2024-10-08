@@ -80,6 +80,10 @@ for node_info in "${nodes[@]}"; do
 
     echo "Creating directory chainfiles/$node_name..."
     mkdir -p chainfiles/$node_name
+    echo "Creating cli-wrappers/$node_name"-cli""
+    echo "#!/bin/bash" > cli-wrappers/$node_name"-cli"
+    echo "docker exec --user $ssh_user $node_name marmara-cli \"\$@\"" >> cli-wrappers/$node_name"-cli"
+    chmod +x cli-wrappers/$node_name"-cli"
 done
 
 echo "Docker Compose file generation complete. All steps finished successfully."
