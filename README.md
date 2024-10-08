@@ -74,7 +74,20 @@ This will run the `getinfo` command in the `mcl_node1` container as the defined 
 
 Each service has its own wrapper, so you can interact with different containers using their respective `cli-wrapper` scripts. 
 
-### 6. Making Changes to Configuration
+### 6. Accessing the Containers with SSH
+
+Once the MCL nodes are running, you can connect to each container via SSH using the following command format:
+
+```bash
+ssh <ssh_user>@<container_ip> -p <ssh_port>
+```
+
+- **ssh_user**: The SSH user defined in the configuration.
+- **container_ip**: The IP address of the container (can be obtained via `docker inspect <container_name>`).
+- **ssh_port**: The port exposed in the Docker Compose file (for example, `2201` for `mcl_node1`).
+
+
+### 7. Making Changes to Configuration
 
 Whenever you make changes to the `config` file, you need to rerun the `setup.sh` script and then restart your containers using:
 
@@ -106,5 +119,3 @@ For example, to view logs for `mcl_node1`:
 ```bash
 docker logs mcl_node1
 ```
-
-
