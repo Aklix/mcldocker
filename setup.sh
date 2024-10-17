@@ -31,7 +31,7 @@ check_duplicates() {
     declare -A seen_names
     declare -A seen_ports
     for node_info in "${nodes[@]}"; do
-        IFS=":" read -r node_name password ssh_port pubkey <<< "$node_info"
+        IFS=":" read -r node_name ssh_user ssh_pw ssh_port pubkey <<< "$node_info"
         # Check for duplicate node names
         if [[ -n "${seen_names[$node_name]}" ]]; then
             echo "Error: Duplicate node name '$node_name' found."
