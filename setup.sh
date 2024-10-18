@@ -54,6 +54,9 @@ if [ -f "$OUTPUT_FILE" ]; then
     mv "$OUTPUT_FILE" "${OUTPUT_FILE}.bak"
 fi
 
+echo "Removing old CLI wrapper files..."
+rm -f cli-wrappers/*-cli
+
 echo "Starting to create docker compose file from template files ..."
 echo "version: '3.7'" >> "$OUTPUT_FILE"
 echo "services:" >> "$OUTPUT_FILE"

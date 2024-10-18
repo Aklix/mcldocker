@@ -3,3 +3,4 @@ config
 docker-compose.yml
 chainfiles/*
 *.bak
+*.log

@@ -16,4 +16,4 @@ nodes=(
 )
 
 mcl_version=v1.2.1
-
+healt_check_interval=35
