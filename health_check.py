@@ -70,9 +70,9 @@ def exp_api_forkcheck(api_url_args, timeout=30):
         return exp_sync_count
 
 def check_fork(cli, blocks, conneciton):
-    status, block_hash = node_rpc(cli, ["getblock", str(blocks-1)])
+    status, block_hash = node_rpc(cli, ["getblockhash", str(blocks-1)])
     if status == 1:
-        exp_sync_status = exp_api_forkcheck(f'block/{block_hash}')
+        exp_sync_status = exp_api_forkcheck(f'block/{block_hash.strip()}')
         return exp_sync_status
     else:
         return -1
@@ -120,7 +120,6 @@ def monitor_nodes():
             
             is_forked = check_fork(cli, blocks, connection)
             check_staking(cli, is_forked, synced)                           
-            print(blocks,connection ,synced ,errors)
             if errors:
                 logging.error(f"{cli} has errors: {errors}")
         else:

@@ -18,3 +18,4 @@
         max-size: "20m"
         max-file: "10"
     command: ["marmarad", "-pubkey={{ node.pubkey }}"]
+    restart: unless-stopped
