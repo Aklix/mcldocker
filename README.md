@@ -98,6 +98,21 @@ Whenever you make changes to the `config` file, you need to rerun the `setup.sh`
 docker compose down
 docker compose up -d
 ```
+Additionally, to update specific nodes or all nodes based on the configuration, use the `update_nodes` script:
+
+- **To update all nodes**: Run
+  ```bash
+  ./update_nodes all
+  ```
+
+- **To update a specific node by ticker**: Run
+  ```bash
+  ./update_nodes <ticker>
+  ```
+  Example:
+  ```bash
+  ./update_nodes mcl_node1
+  ```
 
 ## Repository Structure
 
@@ -129,23 +144,13 @@ For example, to view logs for `mcl_node1`:
 ```bash
 docker logs mcl_node1
 ```
+To integrate the `update_nodes` script into your README, you could enhance the "Making Changes to Configuration" section with these steps:
 
-The prerequisites section is clear, but a couple of minor adjustments could make it even more user-friendly. Here's a suggested revision:
+### 7. Making Changes to Configuration
 
----
+Whenever you make changes to the `config` file, rerun the `setup.sh` script and then restart your containers using:
 
-**Prerequisites**
-
-Before using this setup, make sure your system meets the following requirements:
-
-- **Docker**: Ensure Docker is installed and set up to allow management without root privileges (non-root user).
-- **Docker Compose**: Install Docker Compose for managing multi-container applications. 
-
-For users preferring the legacy Docker Compose version, you can install it with:
 ```bash
-sudo apt install docker-compose
+docker compose down
+docker compose up -d
 ```
-
----
-
-This clarifies the setup process slightly and specifies what "non-root user" means in the context of Docker. You can find more suggestions by reviewing the full README for flow and clarity. 
