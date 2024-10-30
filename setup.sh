@@ -20,7 +20,7 @@ echo "GROUP_ID=$(id -g)" >> .env
 #echo ".env file created."
 
 echo "building mclbuilder for mc-${mcl_version}"
-docker-compose -f docker-compose.mclbuild build
+docker compose -f docker-compose.mclbuild build
 
 OUTPUT_FILE="docker-compose.yml"
 SERVICE_TEMPLATE="templates/docker-service.template"
@@ -58,7 +58,6 @@ echo "Removing old CLI wrapper files..."
 rm -f cli-wrappers/*-cli
 
 echo "Starting to create docker compose file from template files ..."
-echo "version: '3.7'" >> "$OUTPUT_FILE"
 echo "services:" >> "$OUTPUT_FILE"
 
 for node_info in "${nodes[@]}"; do

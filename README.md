@@ -6,10 +6,10 @@ This repository provides an automated Docker setup for managing multiple MCL (Ma
 
 Before using this setup, ensure that you have the following installed on your machine:
 
- [Docker](https://docs.docker.com/engine/install/ubuntu/) / [w/ convenience script](https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script)
+ [Docker](https://docs.docker.com/engine/install/ubuntu/) / [manage as a nonroot user](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
 - [Docker Compose](https://docs.docker.com/compose/install/linux/#install-using-the-repository)
 
-also need docker-compose for this: `sudo apt install docker-compose`
+also if prefered old docker-compose intalled from here: `sudo apt install docker-compose`
 
 ## Setup Instructions
 
@@ -55,7 +55,7 @@ Once the configuration is done, run the `setup.sh` script to build the Docker im
 Once the setup is complete, you can launch your MCL nodes using Docker Compose:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 This will start all the containers defined in your `docker-compose.yml` file in detached mode.
@@ -92,8 +92,8 @@ ssh <ssh_user>@<container_ip> -p <ssh_port>
 Whenever you make changes to the `config` file, you need to rerun the `setup.sh` script and then restart your containers using:
 
 ```bash
-docker-compose down
-docker-compose up -d
+docker compose down
+docker compose up -d
 ```
 
 ## Repository Structure
@@ -104,6 +104,13 @@ docker-compose up -d
 - `docker-compose.yml`: Docker Compose configuration to manage containers.
 - `docker-compose.mclbuild`: Build configuration for creating the Docker images.
 - `cli-wrappers/`: Directory containing wrapper scripts for interacting with the containers.
+
+## Healt check scripts
+The health check script is a Python program that monitors container status. It verifies block synchronization and enables staking when blocks are synced. It also checks block validity through the explorer API, disabling staking if the chain forks and waiting for synchronization. If syncing fails, it will restart the chain.
+
+- **Start the health check**: Run `./start_health_check`, which runs in the background.
+- **Stop the health check**: Run `./stop_health_check` to terminate the health check process.
+- **Output log**: The health check log can be found in `health_check.log`.
 
 ## Troubleshooting
 
