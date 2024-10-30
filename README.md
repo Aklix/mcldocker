@@ -6,10 +6,13 @@ This repository provides an automated Docker setup for managing multiple MCL (Ma
 
 Before using this setup, ensure that you have the following installed on your machine:
 
- [Docker](https://docs.docker.com/engine/install/ubuntu/) / [manage as a nonroot user](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
-- [Docker Compose](https://docs.docker.com/compose/install/linux/#install-using-the-repository)
+- [Docker](https://docs.docker.com/engine/install/ubuntu/) / [manage as a nonroot user](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user): Ensure Docker is installed and set up to allow management without root privileges (non-root user).
+- [Docker Compose](https://docs.docker.com/compose/install/linux/#install-using-the-repository): Install Docker Compose for managing multi-container applications.
 
-also if prefered old docker-compose intalled from here: `sudo apt install docker-compose`
+For users preferring the legacy Docker Compose version, you can install it with:
+```bash
+sudo apt install docker-compose
+```
 
 ## Setup Instructions
 
@@ -126,3 +129,23 @@ For example, to view logs for `mcl_node1`:
 ```bash
 docker logs mcl_node1
 ```
+
+The prerequisites section is clear, but a couple of minor adjustments could make it even more user-friendly. Here's a suggested revision:
+
+---
+
+**Prerequisites**
+
+Before using this setup, make sure your system meets the following requirements:
+
+- **Docker**: Ensure Docker is installed and set up to allow management without root privileges (non-root user).
+- **Docker Compose**: Install Docker Compose for managing multi-container applications. 
+
+For users preferring the legacy Docker Compose version, you can install it with:
+```bash
+sudo apt install docker-compose
+```
+
+---
+
+This clarifies the setup process slightly and specifies what "non-root user" means in the context of Docker. You can find more suggestions by reviewing the full README for flow and clarity. 
