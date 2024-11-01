@@ -10,9 +10,9 @@ fi
 # If 'all' is provided, update all nodes
 if [ "$1" == "all" ]; then
     echo "Updating all nodes..."
-    docker-compose up -d --build
+    docker compose up -d --build
 else
     # If specific ticker is provided, update the node for that ticker
     echo "Updating node for ticker: $1..."
-    docker-compose up -d --build "$1"
+    docker compose up -d --build "$1"
 fi

@@ -31,8 +31,17 @@ By default, Docker modifies iptables rules, which can bypass UFW. To ensure Dock
    ```bash
    DOCKER_OPTS="--iptables=false"
    ```
-
-3. Restart Docker to apply the change:
+3. Create the configuration file if it doesn’t exist: 
+   ```bash
+   sudo nano /etc/docker/daemon.json
+   ```
+   Add the following:
+   ```bash
+   {
+   "iptables": false
+   }
+   ```  
+4. Restart Docker to apply the change:
    ```bash
    sudo systemctl restart docker
    ```
